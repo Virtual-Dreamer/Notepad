@@ -3,6 +3,7 @@ import tkinter as tk
 import tkinter.messagebox
 from tkinter import filedialog
 from tkinter.scrolledtext import ScrolledText
+import os
 
 #  initialize tkinter
 pad = tk.Tk()
@@ -23,13 +24,15 @@ menu.add_cascade(label="Info", menu=infoMenu)
 
 
 def new():
-    note.delete(0, "end")
+    note.delete(1.0, "end")
 
 
 def open_file():
     file = filedialog.askopenfile()
     file_content = file.read()
-    note.insert(0, file_content)
+    note.delete(1.0, "end")
+    note.insert(1.0, file_content)
+    pad.title("Python Notepad" + "\\" + os.path.abspath(os.path.basename(str(file).replace("mode='r' encoding='cp1252'>", ""))))
 
 
 def save_as():
